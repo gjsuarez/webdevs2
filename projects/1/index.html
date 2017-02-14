@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Crimes 2017</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Yatra+One" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+    <div id="nav">
+               <div id="nav_wrapper">
+                    <ul>
+                         <li><a href="https://preview.c9users.io/gjsuarez/webdev1617/CrimeProject/crime_bootstrap.html?_c9_id=livepreview0&_c9_host=https://ide.c9.io.html">Home</a></li><li>
+                         <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">API Data Portal</a>
+                         </li><li>
+                         <a href="https://www.cityofchicago.org/content/dam/city/depts/doit/general/GIS/Chicago_Maps/Community_Areas/Community_Areas_w_Number.pdf">District Codes</a>
+                         <li><a href="http://home.chicagopolice.org/community/crime-prevention/">Protection and Safety</a></li>
+                    </ul>
+               </div>  
+          </div>
+<div id="wrapper">
+<div id="header" class="jumbotron">
+  <h1>Crimes In My Community!</h1>
+  <img src="CrimeBackground.jpg" class="img-circle" alt="logo" width="350" height="250">
+  <p>
+            Select Your Community Area, And The Crime Type You Are Looking For.
+<br>
+<div class="form">
+        <label for="community_area">Community Area</label>
+        <select id="community_area" placeholder="Select Community">
+          <option default>Select Your Community</option>
+          <option value="1">ROGERS PARK</option>
+          <option value="2">WEST RIDGE</option>
+          <option value="3">UPTOWN</option>
+          <option value="4">LINCOLN SQUARE</option>
+          <option value="5">NORTH CENTER</option>
+          <option value="6">LAKE VIEW</option>
+          <option value="7">LINCOLN PARK</option>
+          <option value="8">NEAR NORTH SIDE</option>
+          <option value="9">EDISON PARK</option>
+          <option value="10">NORWOOD PARK</option>
+          <option value="11">JEFFERSON PARK</option>
+          <option value="12">FOREST GLEN</option>
+          <option value="13">NORTH PARK</option>
+          <option value="14">ALBANY PARK</option>
+          <option value="15">PORTAGE PARK</option>
+          <option value="16">IRVING PARK</option>
+          <option value="17">DUNNING</option>
+          <option value="18">MONTCLARE</option>
+          <option value="19">BELMONT CRAGIN</option>
+          <option value="20">HERMOSA</option>
+          <option value="21">AVONDALE</option>
+          <option value="22">LOGAN SQUARE</option>
+          <option value="23">HUMBOLDT PARK</option>
+          <option value="24">WEST TOWN</option>
+          <option value="25">AUSTIN</option>
+          <option value="26">WEST GARFIELD PARK</option>
+          <option value="27">EAST GARFIELD PARK</option>
+          <option value="28">NEAR WEST SIDE</option>
+          <option value="29">NORTH LAWNDALE</option>
+          <option value="30">SOUTH LAWNDALE</option>
+          <option value="31">LOWER WEST SIDE</option>
+          <option value="32">LOOP</option>
+          <option value="33">NEAR SOUTH SIDE</option>
+          <option value="34">ARMOUR SQUARE</option>
+          <option value="35">DOUGLAS</option>
+          <option value="36">OAKLAND</option>
+          <option value="37">FULLER PARK</option>
+          <option value="38">GRAND BOULEVARD</option>
+          <option value="39">KENWOOD</option>
+          <option value="40">WASHINGTON PARK</option>
+          <option value="41">HYDE PARK</option>
+          <option value="42">WOODLAWN</option>
+          <option value="43">SOUTH SHORE</option>
+          <option value="44">CHATHAM</option>
+          <option value="45">AVALON PARK</option>
+          <option value="46">SOUTH CHICAGO</option>
+          <option value="47">BURNSIDE</option>
+          <option value="48">CALUMET HEIGHTS</option>
+          <option value="49">ROSELAND</option>
+          <option value="50">PULLMAN</option>
+          <option value="51">SOUTH DEERING</option>
+          <option value="52">EAST SIDE</option>
+          <option value="53">WEST PULLMAN</option>
+          <option value="54">RIVERDALE</option>
+          <option value="55">HEGEWISCH</option>
+          <option value="56">GARFIELD RIDGE</option>
+          <option value="57">ARCHER HEIGHTS</option>
+          <option value="58">BRIGHTON PARK</option>
+          <option value="59">MCKINLEY PARK</option>
+          <option value="60">BRIDGEPORT</option>
+          <option value="61">NEW CITY</option>
+          <option value="62">WEST ELSDON</option>
+          <option value="63">GAGE PARK</option>
+          <option value="64">CLEARING</option>
+          <option value="65">WEST LAWN</option>
+          <option value="66">CHICAGO LAWN</option>
+          <option value="67">WEST ENGLEWOOD</option>
+          <option value="68">ENGLEWOOD</option>
+          <option value="69">GREATER GRAND CROSSING</option>
+          <option value="70">ASHBURN</option>
+          <option value="71">AUBURN GRESHAM</option>
+          <option value="72">BEVERLY</option>
+          <option value="73">WASHINGTON HEIGHTS</option>
+          <option value="74">MOUNT GREENWOOD</option>
+          <option value="75">MORGAN PARK</option>
+          <option value="76">OHARE</option>
+          <option value="77">EDGEWATER</option>
+        </select><br>
+        
+        <label for="primary_type">Type of Crimes</label>
+        <select id="primary_type">
+          <option default>Select A Crime</option>
+          <option value="BATTERY">Battery</option>
+          <option value="CRIMINAL DAMAGE">Criminal Damage</option>
+          <option value="CRIMINAL TRESSPASS">Criminal Trespass</option>
+          <option value="BURGLARY">Burglary</option>
+          <option value="THEFT">Theft</option>
+          <option value="NARCOTICS">Narcotics</option>
+          <option value="WEAPONS VIOLATIONS">Weapons Violations</option>
+          <option value="ASSAULT">Assault</option>
+          <option value="DECEPTIVE PRACTICE">Deceptive Practice</option>
+          <option value="KIDNAPPING">Kidnapping</option>
+          <option value="MOTOR VEHICLE THEFT">Motor Vehicle Theft</option>
+          <option value="PUBLIC PEACE VIOLATION">Public Peace Violation</option>
+          <option value="ROBBERY">Robbery</option>
+          <option value="CRIM SEXUAL ASSAULT">Crim Sexual Assault</option>
+          <option value="HOMICIDE">Homicide</option>
+          <option value="OFFENSE INVOLVING CHILDREN">Offense Involving Children</option>
+          <option value="INTERFERENCE WITH PUBLIC OFFICER">Interference With Public Officer</option>
+          <option value="PROSTITUTION">Prostitution</option>
+          <option value="SEX OFFENSE">Sex Offense</option>
+          <option value="OTHER OFFENSE">Other Offense</option>
+        </select><br>
+        
+        <button id="search">Find Crimes</button>
+      </div>
+
+    <p>Refresh Page To Make Another Search</p>
+</div>
+
+<!-- Info -->
+
+    <div id="results">
+        <p>Website Created By Gustavo Suarez Jr, and Aubrey Howard. The skills were
+        taught by Mr.Hayes. This Website is meant for the user to see the crimes of 2016 in his neighborhood.
+        </p>
+    </div>
+
+<!-- Script -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        //var crimes;
+        
+        // base URL
+        var BaseURL = "https://data.cityofchicago.org/resource/6zsd-86xi.json?year=2016";
+        
+        
+        $(function() {
+  
+  $("#search").on("click", function() {
+    
+    // reset the URL for each search request
+    var searchUrl = BaseURL;
+    
+     $("#results").html("");
+                
+                var searchTerm = "&community_area=" + $("#community_area").val() +
+                                 "&primary_type=" + $("#primary_type").val();
+                
+                Url = BaseURL + searchTerm;
+                
+                console.log(Url);
+                
+                        // jQuery command to retrieve json data
+                $.getJSON(Url)
+                    .done (function (data) {
+                $( "#results" ).empty();        
+                        // TODO:  add script to add data to the DOM
+                console.log(data);
+                        
+                $("#results").append("Results Returned: " + data.length + "<br><hr>");        
+                        // loop through the records
+                $.each (data ,
+                    function (index,value) {
+                        //append content to the body
+                 var html = 
+                 "<div id=" +"data" + ">" 
+                 +"<h2>"
+                 +value.primary_type + " on " + value.date + " at " + value.block
+                 +"</h2>"
+                 +"<h3>"
+                 + "Case Number:"
+                 + value.case_number
+                 +"<br>"
+                 + "Description:"
+                 + value.description
+                 +"<br>"
+                 + "FBI Code:"
+                 + value.fbi_code
+                 +"<br>"
+                 + "Was Anybody Arrested? "
+                 + value.arrest
+                 +"<br>"
+                 + "Was There Any Domestic Violence? "
+                 + value.domestic
+                 +"<br>"
+                 + '<a href="https://www.google.com/maps/place/' + value.latitude + "," + value.longitude + 'target="blank">Click Here!</a>'
+                 +"</h3>"
+                 +"</div>"
+                 +"<br>"
+                 ; 
+                
+                
+                $("#results").append(html);
+                        }); 
+            });
+        });
+        });
+</script>
+
+<!-- Footer -->
+<div id="footer" class="footer">
+    <p>Copyright 2016</p>
+</div>
+</div>
+
+</body>
+</html>
