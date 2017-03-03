@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lane CTA Busses</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="busTracker.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="http://www.lanetech.org/" target="_blank">Lane Tech Website</a></li>
+        <li><a href="https://www.ventrachicago.com/balance/" target="_blank">Ventra Balance</a></li>
+        <li><a href="https://github.com/gjsuarez/webdevs2" target="_blank">My Github</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h2>Lane CTA Bus</h2>
+  <img src="ctalogo.jpg" class="img-circle" alt="CTA Logo" width="254" height="186">
+  <h2>Tracker</h2>
+</div>
+
+<br>
+  
+    <div id="152Eastbound" class="col-sm-3"> 
+      <h1>152 East</h1>    
+    </div>
+    <div id="152Westbound" class="col-sm-3"> 
+      <h1>152 West</h1>    
+    </div>
+    <div id="49Northbound" class="col-sm-3">
+      <h1>49 North</h1>
+    </div>
+    <div id="49Southbound" class="col-sm-3">
+      <h1>49 South</h1>
+    </div>
+    <br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+        $(function() {
+          
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://www.ctabustracker.com/bustime/api/v2/getpredictions?key=TVZfmcNhG5UAJs25KsnChShuD&rt=49,X49,152&stpid=8417,12527,8195,12569&format=json";
+          
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "TVZfmcNhG5UAJs25KsnChShuD",
+                      "format":"json"
+                      
+              }
+            }).done (function (data) {
+              console.log(data);
+              var target;
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                target = '#' + v.rt + v.rtdir;
+                  $(target).append('<div id="results">' + v.stpnm + "= " + v.prdctdn + " Minute Wait" + "</div>");
+                
+              })
+
+            });
+        });
+            
+  
+</script>
+
+</body>
+</html>
