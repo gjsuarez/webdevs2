@@ -8,6 +8,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="busTracker.css">
+  <link rel="manifest" href="./manifest.json">
+    <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Lane CTA">
+  <link rel="apple-touch-icon" src="lanecs.png">
 </head>
 <body>
 
@@ -30,9 +36,9 @@
   </div>
 </nav>
 
-<div class="jumbotron text-center">
+<div id="jumbotron" class="jumbotron text-center">
   <h2>Lane CTA Bus</h2>
-  <img src="ctalogo.jpg" class="img-circle" alt="CTA Logo" width="254" height="186">
+  <img src="lanecs.png" class="img-circle" alt="LaneCS Logo" width="254" height="186">
   <h2>Tracker</h2>
 </div>
 

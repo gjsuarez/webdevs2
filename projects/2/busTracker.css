@@ -2,6 +2,7 @@
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
+      background-color: #c60c30;
     }
     
     /* Add a gray background color and some padding to the footer */
@@ -26,4 +27,17 @@
   #results {
       background-color: #f2f2f2;
       font-size: large;
+      color: black;
+      font-weight: bold; 
     }
+    
+  #jumbotron {
+      background-color: #059;
+      color:white;
+    
+  }
+  
+  h1 {
+    color: #059;
+  }
+  
