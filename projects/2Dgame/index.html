@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>RM road to UCL</title>
+    <style>
+   
+            canvas {
+              border:4px solid green;
+              background-color:white;
+            }
+            #player {
+              display:none;
+            }
+          
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1300" height="400">
+    <img id="madrid" src="rmlogo.png">
+    <img id="ucl" src="ucl.jpg">
+    <img id="juve" src="juve.jpg">
+    <img id="red" src="red.png">
+    </canvas>
+    <h1>Move with the Up/Down Arrow Keys. UCL Thropy is 100pts. Juventus is minus 1 life. Red Card is Game Over. Press [Enter] to restart game.</h1>
+    
+    <script>
+      var livesRemaining = 3;
+      var score = 0;
+      var paused = false;
+      /*
+      
+        main animation loop
+      */
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      
+      var image = document.getElementById("madrid");
+      var madridX = 20;
+      var madridY = 100;
+      
+      var image1 = document.getElementById("ucl");
+      var uclX = 200;
+      var uclY = Math.floor(Math.random() * 500);
+      
+      var image2 = document.getElementById("juve");
+      var juveX = 200;
+      var juveY = Math.floor(Math.random() * 500);
+      
+      var image3 = document.getElementById("red");
+      var redX = 200;
+      var redY = Math.floor(Math.random() * 500);
+      
+      function animate() {
+        // clear canvas
+          ctx.clearRect(0,0,canvas.width,canvas.height); 
+        
+        // draw background
+        
+        // draw player
+          ctx.drawImage(image, madridX, madridY, 50, 50);
+        // draw harm
+          ctx.drawImage(image2, juveX, juveY, 50, 50);
+          juveX = juveX - 15.5;
+          
+          ctx.drawImage(image3, redX, redY, 50, 50);
+          redX = redX - 20.5;
+        // check for and handle edge condition
+          if (juveX < 0)
+          {
+            juveX = canvas.width;
+            juveY = Math.floor(Math.random() * 560); 
+          }
+        // draw benefit
+           ctx.drawImage(image1, uclX, uclY, 50, 50);
+           uclX = uclX - 10.5;
+        // check for and handle edge condition
+          if (uclX < 0 )
+          {
+            uclX = canvas.width;
+            uclY = Math.floor(Math.random() * 560);
+          }
+          
+          if (redX < 0 )
+          {
+            redX = canvas.width;
+            redY = Math.floor(Math.random() * 560);
+          }
+        // check for harm collision
+          if (madridX < juveX + 35 && madridX + 35 > juveX && madridY < juveY + 35 && madridY + 35 > juveY) 
+          {
+            livesRemaining = livesRemaining - 1;
+            juveX = canvas.width;
+            juveY = Math.floor(Math.random() * 560);
+          } 
+          if (livesRemaining <= 0)
+          {
+            paused = true;  
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+          }
+          
+          if (madridX < redX + 35 && madridX + 35 > redX && madridY < redY + 35 && madridY + 35 > redY) 
+          {
+            livesRemaining = livesRemaining - 3;
+            redX = canvas.width;
+            redY = Math.floor(Math.random() * 560);
+          } 
+          if (livesRemaining <= 0)
+          {
+            paused = true;  
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+          } 
+        // check for benefit collision
+          if (madridX < uclX + 35 && madridX + 35 > uclX && madridY < uclY + 35 && madridY + 35 > uclY) 
+          {
+            score = score + 100;
+            uclX = canvas.width;
+            uclY = Math.floor(Math.random() * 560); 
+          }
+        // draw text (lives and score)
+          ctx.font = "15px Consolas";
+          ctx.fillStyle = "black";
+          ctx.fillText("Lives: " + livesRemaining, 10, 30);
+          
+          ctx.font = "15px Consolas";
+          ctx.fillStyle = "black";
+          ctx.fillText("Score: " + score, 10, 60);
+          
+        //  if the game has not been paused, 
+          if (!paused) {
+            requestAnimationFrame(animate);
+          }
+        
+      }
+          animate();
+          
+      //  event handler for moving player
+      //    use onKeyPress event, and change the player.y value based on the up/down keys
+       document.addEventListener("keydown", move );
+        function move (e) {
+         
+          if (e.keyCode == 40){
+            madridY = madridY + 15;
+          }
+          if (e.keyCode == 38){
+            madridY = madridY - 15; 
+          }
+          if (e.keyCode == 13){
+            location.reload();
+          }
+           
+        }
+      
+      
+      
+      
+    </script>
+    
+    
+  </body>
+</html>

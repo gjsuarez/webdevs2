@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <!-- Material Design Lite -->
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+    <style>
+      #display {
+        background-color:white;
+      }
+      #workers{
+        text-align:center;
+        background-color:pink;
+      }
+      #fixed-tab-3{
+        text-align:center;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Chicago City Council Workers</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Search Workers</a>
+          <a href="#fixed-tab-2" class="mdl-layout__tab">Library</a>
+          <a href="#fixed-tab-3" class="mdl-layout__tab">About</a>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+          <div class="page-content">
+            
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="samplework">
+                  <i class="material-icons">search</i>
+                </label>
+              <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="samplework">
+                <label class="mdl-textfield__label" for="sample-expandable"></label>
+                </div>
+              </div>
+            </form>
+            <button type="button" id="search">Search</button>
+            <div><p>(Press Search leaving the search empty to allow all workers load in)</p></div>
+            
+            <div id="display">
+              
+              
+            
+              
+            </div>
+          </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+          <div class="page-content"></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+          <div class="page-content">
+            <h3>Chicago City Council Workers</h3>
+            <p>This website is meant to search the chicago data portal to find the city council employees.  </p>
+            </div>
+        </section>
+      </main>
+    </div>
+    <script>
+  
+    
+        var url = "https://data.cityofchicago.org/resource/tt4n-kn4t.json";
+
+        var db = new Dexie("employeeDB");
+        db.version(1).stores({
+	      employees: '++id,name,department,title,salary'
+        });
+
+        db.employees.count().then(function(count){
+          console.log(count);
+          
+          if(count == 0 ) {
+            
+            
+          $.ajax({
+            url: url,
+            dataType: "json",
+            method: "GET", 
+            data: {
+                "department" : "CITY COUNCIL"
+            }  
+          }).done(function(data) {
+            console.log(data);
+            $.each(data, function(index, value){ 
+              db.employees.add({
+            		name: value.name,
+            		title: value.job_titles, 
+            		salary: value.employee_annual_salary,
+            		department: value.department
+        		
+            	});
+            });
+          });
+          }
+        });
+        
+        
+        $("#search").on("click", function() {
+          
+          displayEmployees();
+          var search = $("#samplework").val();
+          console.log($("#samplework").val());
+        });
+        
+        function displayEmployees() {
+          $("#display").html("")
+          //db.employees.each(function (employee) {
+            db.employees
+		        .where('name').startsWith($("#samplework").val())
+		        .each (function (employees) {
+		          
+		        var html = '<div id="workers">' + "<strong>" + employees.name + "</strong>";
+            html += "<br>" + employees.department + "</div>" +"<br>";
+            $("#display").append(html);
+            console.log(employees.name);
+		          
+		        });
+		  
+          //});
+        }  
+        
+      
+        
+    </script>
+  </body>
+</html> 
